@@ -8,6 +8,7 @@ public class PlaneService {
         System.out.println("Model: " + plane.getModel());
         System.out.println("Country: " + plane.getCountry());
         System.out.println("Year: " + plane.getYear());
+        System.out.println("Hours: " + plane.getHours());
         System.out.println("Military: " + plane.isMilitary());
         System.out.println("Weight: " + plane.getWeight());
         System.out.println("Wingspan: " + plane.getWingspan());
@@ -19,19 +20,19 @@ public class PlaneService {
     public void Task2(Plane plane) {
         if (plane.isMilitary()) {
             System.out.println(
-                    "Cost: " + plane.getCost() + "TopSpeed: " + plane.getTopSpeed()
+                    "Cost: " + plane.getCost() + " | TopSpeed: " + plane.getTopSpeed()
             );
         } else {
             System.out.println(
-                    "Model: " + plane.getModel() + "Country: " + plane.getCountry()
+                    "Model: " + plane.getModel() + " | Country: " + plane.getCountry()
             );
         }
     }
 
     public Plane Task3(Plane planeFirst, Plane planeSecond) {
-        if (planeFirst.getYear() < planeSecond.getYear()) {
+        if (planeFirst.getYear() > planeSecond.getYear()) {
             return planeFirst;
-        } else if (planeFirst.getYear() > planeSecond.getYear()) {
+        } else if (planeFirst.getYear() < planeSecond.getYear()) {
             return planeSecond;
         }
         return planeFirst;
@@ -45,14 +46,14 @@ public class PlaneService {
     }
 
     public void Task5(Plane planeFirst, Plane planeSecond, Plane planeThird) {
-        if (planeFirst.getSeats() > planeSecond.getSeats() &&
-                planeFirst.getSeats() > planeThird.getSeats()) {
+        if (planeFirst.getSeats() < planeSecond.getSeats() &&
+                planeFirst.getSeats() < planeThird.getSeats()) {
             System.out.println(planeFirst.getCountry());
-        } else if (planeSecond.getSeats() > planeFirst.getSeats() &&
-                planeSecond.getSeats() > planeThird.getSeats()) {
+        } else if (planeSecond.getSeats() < planeFirst.getSeats() &&
+                planeSecond.getSeats() < planeThird.getSeats()) {
             System.out.println(planeSecond.getCountry());
-        } else if (planeThird.getSeats() > planeFirst.getSeats() &&
-                planeThird.getSeats() > planeSecond.getSeats()) {
+        } else if (planeThird.getSeats() < planeFirst.getSeats() &&
+                planeThird.getSeats() < planeSecond.getSeats()) {
             System.out.println(planeThird.getCountry());
         } else if (planeFirst == planeSecond && planeSecond == planeThird) {
             System.out.println(planeFirst.getCountry());
@@ -76,27 +77,25 @@ public class PlaneService {
             if (planeMilitary == null) {
                 if (plane.isMilitary()) {
                     planeMilitary = plane;
-                } else if (plane.isMilitary() && plane.getHours() > 100) {
+                } else if (planeMilitary.isMilitary() && planeMilitary.getHours() > 100) {
                     planeMilitary = plane;
+                    planeService.Task1(planeMilitary);
                 }
             }
         }
-        if (planeMilitary != null) {
-            planeService.Task1(planeMilitary);
-        } else {
+        if (planeMilitary == null) {
             System.out.println("Don't have military plane");
         }
     }
 
     public Plane Task8(Plane[] planes) {
         Plane minWeightPlaneFirst = planes[0];
-        Plane minWeightPlaneSecond = planes[1];
-        for (int i = 0; i < planes.length; i++) {
-            if (planes[i].getWeight() < minWeightPlaneFirst.getWeight()) {
+        for (int i = 1; i < planes.length; i++) {
+            if (planes[i].getWeight() <= minWeightPlaneFirst.getWeight()) {
                 minWeightPlaneFirst = planes[i];
             }
         }
-        return minWeightPlaneFirst; ///////??????????????
+        return minWeightPlaneFirst;
     }
 
     public Plane Task9(Plane[] planes) {
@@ -118,7 +117,7 @@ public class PlaneService {
         Plane tempPlain;
         for (int i = 0; i < planes.length; i++) {
             for (int j = 1; j < planes.length - i; j++) {
-                if (planes[j].getYear() > planes[j - 1].getYear()) {
+                if (planes[j].getYear() < planes[j - 1].getYear()) {
                     tempPlain = planes[j];
                     planes[j] = planes[j - 1];
                     planes[j - 1] = tempPlain;
