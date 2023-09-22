@@ -30,9 +30,7 @@ public class PlaneService {
     }
 
     public Plane Task3(Plane planeFirst, Plane planeSecond) {
-        if (planeFirst.getYear() > planeSecond.getYear()) {
-            return planeFirst;
-        } else if (planeFirst.getYear() < planeSecond.getYear()) {
+        if (planeFirst.getYear() < planeSecond.getYear()) {
             return planeSecond;
         }
         return planeFirst;
