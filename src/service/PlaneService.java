@@ -75,7 +75,7 @@ public class PlaneService {
             if (planeMilitary == null) {
                 if (plane.isMilitary()) {
                     planeMilitary = plane;
-                } else if (planeMilitary.isMilitary() && planeMilitary.getHours() > 100) {
+                } else if (plane.isMilitary() && plane.getHours() > 100) {
                     planeMilitary = plane;
                     planeService.Task1(planeMilitary);
                 }
